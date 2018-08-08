@@ -19,25 +19,8 @@ using namespace caffe;
 class INetworkWorker
 {
 public:
-	INetworkWorker();
-	virtual ~INetworkWorker();
-	virtual void Initialize(const string& model_file, const string& weights_file);
-	virtual void Predict(const cv::Mat& img);
-
-protected:
-	shared_ptr<Net<float> > net_;
-
-private:
-	void SetMean(const string& mean_value);
-
-	void WrapInputLayer(std::vector<cv::Mat>* input_channels);
-
-	void Preprocess(const cv::Mat& img,
-		std::vector<cv::Mat>* input_channels);
-
-private:
-	cv::Size input_geometry_;
-	int num_channels_;
-	cv::Mat mean_;
+	virtual ~INetworkWorker(){};
+	virtual void Initialize(const string& model_file, const string& weights_file) = 0;
+	virtual void Predict(const cv::Mat& img) = 0;
 };
 
